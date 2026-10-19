@@ -1,0 +1,20 @@
+{
+  "name": "amm-os-starter",
+  "version": "2.0.0",
+  "description": "Builds a Second Brain for entrepreneurs and small businesses: an interview in three short rounds, then a plain folder of Markdown files that any AI agent can read (Claude, ChatGPT, Gemini) and that opens in Obsidian. Includes modes to check, extend, map and upgrade the folder.",
+  "author": {
+    "name": "AMM (AI Magic Makers)",
+    "url": "https://github.com/AiMagicMakers"
+  },
+  "homepage": "https://github.com/AiMagicMakers/amm-marketplace",
+  "repository": "https://github.com/AiMagicMakers/amm-marketplace",
+  "keywords": [
+    "second-brain",
+    "memory",
+    "context",
+    "onboarding",
+    "markdown",
+    "obsidian",
+    "smb"
+  ]
+}

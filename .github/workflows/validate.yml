@@ -1,0 +1,50 @@
+name: Validate marketplace
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JSON files parse and names agree
+        run: |
+          python3 - <<'EOF'
+          import json
+          m = json.load(open(".claude-plugin/marketplace.json"))
+          p = json.load(open("plugins/amm-os-starter/.claude-plugin/plugin.json"))
+          assert m["name"] == "amm-marketplace", m["name"]
+          entry = [e for e in m["plugins"] if e["name"] == p["name"]]
+          assert entry, "marketplace entry name must equal plugin.json name"
+          assert "version" not in entry[0], "set the version only in plugin.json"
+          print("OK:", m["name"], "lists", p["name"], p["version"])
+          EOF
+
+      - name: Skill files referenced from SKILL.md exist
+        run: |
+          python3 - <<'EOF'
+          import os, re
+          base = "plugins/amm-os-starter/skills/amm-os-starter"
+          s = open(base + "/SKILL.md", encoding="utf-8").read()
+          refs = set(re.findall(r"references/([a-z0-9-]+\.(?:md|html))", s))
+          missing = [r for r in refs if not os.path.exists(f"{base}/references/{r}")]
+          assert not missing, missing
+          assert os.path.exists(base + "/scripts/graph.py")
+          print("OK:", len(refs), "reference files found")
+          EOF
+
+      - name: No em or en dashes in shipped files
+        run: |
+          if grep -rIlP '[\x{2013}\x{2014}]' plugins .claude-plugin README.md; then
+            echo "Found an em or en dash" >&2; exit 1
+          fi
+
+      - name: Claude Code plugin validator
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude plugin validate .
+          claude plugin validate ./plugins/amm-os-starter

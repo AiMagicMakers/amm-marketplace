@@ -1,0 +1,23 @@
+{
+  "name": "amm-marketplace",
+  "description": "Plugins from AMM (AI Magic Makers) for entrepreneurs and small businesses. Build an AI-readable Second Brain and keep it healthy.",
+  "owner": {
+    "name": "AMM (AI Magic Makers)",
+    "url": "https://github.com/AiMagicMakers"
+  },
+  "plugins": [
+    {
+      "name": "amm-os-starter",
+      "source": "./plugins/amm-os-starter",
+      "description": "Builds your Second Brain: an interview in three short rounds, then a plain folder of Markdown files that Claude, ChatGPT or Gemini can read. Includes modes to check, extend, map and upgrade the folder.",
+      "category": "productivity",
+      "tags": [
+        "second-brain",
+        "memory",
+        "context",
+        "onboarding",
+        "smb"
+      ]
+    }
+  ]
+}

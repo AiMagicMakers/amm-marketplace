@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Build output (ZIPs are published as GitHub Release assets, not committed)
+*.zip
+dist/
+
+# Python
+__pycache__/
+*.pyc
+
+# Third-party reference material must not be published
+*.pdf
+
+# Local Claude settings
+.claude/settings.local.json
+.claude/*.local.md
