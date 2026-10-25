@@ -1,6 +1,6 @@
 # Upgrade mode
 
-Current skill version: **2.1.0**. The person's folder carries its version in the frontmatter of the root `CLAUDE.md`: `skill_version: 2.1.0`.
+Current skill version: **2.2.0**. The person's folder carries its version in the frontmatter of the root `CLAUDE.md`: `skill_version: 2.2.0`.
 
 Principle: an upgrade **adds** what the new version brings. It deletes nothing, does not rewrite the person's content, and never touches the "User corrections" section.
 
@@ -13,6 +13,18 @@ Principle: an upgrade **adds** what the new version brings. It deletes nothing, 
 5. Set `skill_version` last, to the current version.
 6. At the Complete level, add a line "Upgrade from version X to version Y" to today's journal. If there is no note for today, create one from `journal-note.md` and add it to `index.md`.
 7. Run the checks of step 5 of the skill and report the result.
+
+## From 2.1.0 to 2.2.0
+
+Version 2.2.0 adds tasks and the AI crew. Everything below applies to the Complete level only. For an Essential folder, set `skill_version` and tell the person that tasks come with the Complete level.
+
+- Create the empty folder `Tasks/` with its `CLAUDE.md` from the "Tasks" section of `folder-claude-md.md`. Create no task.
+- Root `CLAUDE.md`: add the table row for Tasks (see `root-claude-md.md`; put it with the other Complete rows, the position does not matter), add rule 17, and set `skill_version`.
+- `.claudeignore`: add the line `board.html` under the "Generated files" comment.
+- `index.md`: add nothing for tasks (they are listed on the board, not in the index).
+- Tell the person what is new: "add a task", "show the board", "work the next task". Offer to add a first task from one of their goals.
+
+Nothing else changes. The person's notes, prices and corrections stay exactly as they are.
 
 ## From 2.0.0 to 2.1.0
 

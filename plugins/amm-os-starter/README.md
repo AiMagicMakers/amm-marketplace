@@ -13,7 +13,7 @@ These are plain text files (Markdown format). Nothing else to install, nothing h
 | Level | What you get | Time |
 |---|---|---|
 | **Essential** (default) | The base files (`CLAUDE.md`, `AGENTS.md`, `brief.md`, `.claudeignore`) and the `Context/` folder with 8 notes | about 20 minutes |
-| **Complete** | Essential, plus a catalogue of all your notes (`index.md`), `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with your original documents), `Skills/` and `Archive/` | about 40 minutes |
+| **Complete** | Essential, plus a catalogue of all your notes (`index.md`), `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with your original documents), `Tasks/` (task board and AI crew), `Skills/` and `Archive/` | about 40 minutes |
 
 You can start with Essential and move to Complete later, without losing anything.
 
@@ -72,6 +72,7 @@ Second Brain - YourName/
   .claudeignore   the list of what AI must not read
   index.md        the catalogue of all your notes (Complete)
   graph.html      the map of your notes, created on request
+  board.html      your task board, created on request (Complete)
   Context/        identity, offers-and-prices, clients, style, processes,
                   tools, goals, rules
   Projects/       one folder per project              (Complete)
@@ -79,6 +80,7 @@ Second Brain - YourName/
   Decisions/      decisions and their reason          (Complete)
   Resources/      prompts, templates, examples, and
                   sources/: your original documents   (Complete)
+  Tasks/          your tasks and what the crew did    (Complete)
   Skills/         notes for your future skills        (Complete)
   Archive/        what is finished                    (Complete)
 ```
@@ -86,6 +88,16 @@ Second Brain - YourName/
 ## Adding a document later
 
 Do you have a new quote template, a price list or a brief? Say: **"add this document to my second brain"** and give the file. Claude reads the document, keeps the original in `Resources/sources/` (Complete level), then tells you what it proposes to change, note by note. If the document says something different from what is already written (a different price, for example), it shows you both versions and you choose. Nothing is modified before you agree.
+
+## Tasks and your AI crew (Complete level)
+
+Your goals become tasks that an AI crew prepares for you. You stay in control: the crew only writes drafts, and only you can close a task.
+
+- **"Add a task"**: say what you want. Claude asks at most two questions (what does done look like, and a deadline) and links the task to one of your goals.
+- **"Work the next task"**: Claude takes the top ready task and the crew works on it. The **Writer** drafts the text in your style, the **Researcher** looks up public facts when needed, and the **Checker** reviews the draft against your rules (no invented prices, no private data, right tone). The draft waits in "Needs your review". You reply approve, change something, or block.
+- **"Show the board"**: Claude creates `board.html`. Double-click it to see your tasks as columns (Backlog, Ready, In progress, Needs your review, Done, Blocked), what is overdue, and a **Crew** panel with what each agent last did. Tick Auto-refresh to follow along while the crew works.
+
+What the crew never does: send a message, publish anything, or change a file outside the `Tasks/` folder. The board shows what the crew logged. It tells you whether each step was done by a real sub-agent or by Claude playing the role itself ("inline"), so you can see which it was.
 
 ## Seeing your Second Brain as a map
 

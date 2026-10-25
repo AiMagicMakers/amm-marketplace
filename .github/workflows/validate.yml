@@ -33,7 +33,10 @@ jobs:
           refs = set(re.findall(r"references/([a-z0-9-]+\.(?:md|html))", s))
           missing = [r for r in refs if not os.path.exists(f"{base}/references/{r}")]
           assert not missing, missing
-          assert os.path.exists(base + "/scripts/graph.py")
+          for f in ("scripts/graph.py", "scripts/board.py"):
+              assert os.path.exists(f"{base}/{f}"), f
+          for a in ("writer", "researcher", "checker"):
+              assert os.path.exists(f"plugins/amm-os-starter/agents/{a}.md"), a
           print("OK:", len(refs), "reference files found")
           EOF
 

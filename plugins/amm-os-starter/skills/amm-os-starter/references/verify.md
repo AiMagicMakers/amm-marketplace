@@ -10,7 +10,7 @@ Health check of an existing Second Brain. Triggers: "check my second brain", "re
 4. Ask which of the proposed fixes the person wants to apply.
 5. Apply only those. Update `updated` in the files touched, the index (Complete) and `brief.md` if `Context/` changed. At the Complete level, if any fix was applied, note it in today's journal.
 
-`graph.html` is a generated file, not a note: do not open it, do not count it in the checks. If it exists and notes are newer than it, offer to regenerate it ("show my second brain map").
+`graph.html` and `board.html` are generated files, not notes: do not open them, do not count them in the checks. Files in `Tasks/` are tasks, not notes: check them only with check 13 (and with checks 9 to 11, 1 and 10 for form, links and privacy). If `graph.html` exists and notes are newer than it, offer to regenerate it ("show my second brain map"). If `board.html` is older than the latest task change, offer to rebuild it ("show the board").
 
 ## Checks
 
@@ -28,8 +28,9 @@ Health check of an existing Second Brain. Triggers: "check my second brain", "re
 | 10 | Confidentiality | No national ID, bank details, password, email or phone of a private individual. `.claudeignore` exists | all |
 | 11 | Form rules | No em dash or emoji, no leftover `{{` | all |
 | 12 | Version | The folder's `skill_version` compared with the current skill version (see `upgrade.md`) | all |
+| 13 | Tasks | Each `Tasks/T-*.md` has a valid status. No `ready` task without a "Done when" condition. No task `in-progress` for more than 7 days, none in `review` for more than 3 days, none overdue. Log lines follow the format in `Tasks/CLAUDE.md`, and no log line claims `sub-agent` for a role that the log shows was played `inline`. No private data in tasks | Complete |
 
-Hints for check 10 (clues, not proof: always confirm by reading the line; the CIN pattern is noisy and matches many harmless codes). Run them from the folder root, excluding `graph.html` and anything listed in `.claudeignore`:
+Hints for check 10 (clues, not proof: always confirm by reading the line; the CIN pattern is noisy and matches many harmless codes). Run them from the folder root, excluding `graph.html`, `board.html` and anything listed in `.claudeignore`:
 
 ```
 grep -rnE '\b[0-9]{24}\b' .                          # possible RIB

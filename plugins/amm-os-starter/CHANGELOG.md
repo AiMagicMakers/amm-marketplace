@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.2.0
+
+Tasks and an AI crew (Complete level):
+
+- **`Tasks/` folder** with one file per task (`T-0001-short-title.md`): what is wanted, "Done when", an append-only log and a draft result. Statuses: backlog, ready, in progress, review, done, blocked.
+- **Three modes:** "add a task", "show the board" and "work the next task". The work is draft only: nothing is sent or published, and only the owner moves a task to done.
+- **Board** (`board.html`): a single page with columns, filters, a "waiting for you" lane, overdue marks, task details with the log and draft, and a **Crew** panel built from the log. Optional auto-refresh.
+- **Three agents** shipped with the plugin: Writer, Researcher and Checker. They are read-only (they return text; the main assistant writes files). The log records whether a step was done by a real sub-agent or inline, and the board shows it.
+- New check in Check mode for stuck, overdue or malformed tasks.
+
+Upgrade from 2.1.0: say "upgrade my second brain". An empty `Tasks/` folder, one table row, one rule and a `.claudeignore` line are added. Nothing you wrote is changed.
+
+Known limit: whether sub-agents run inside the Claude desktop app or Cowork has not been verified. When they do not, the main assistant plays each role inline and logs it that way.
+
 ## 2.1.0
 
 Three small changes, prompted by a review of retrieval and memory practices:

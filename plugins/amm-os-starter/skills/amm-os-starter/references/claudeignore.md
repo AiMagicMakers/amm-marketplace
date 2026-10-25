@@ -5,8 +5,9 @@ FILE START
 # Files and folders that AI must NOT read.
 # One path per line. Lines starting with # are comments.
 
-# Generated files, useless to read (map of the notes)
+# Generated files, useless to read (map of the notes, task board)
 graph.html
+board.html
 
 # Secrets and access
 .env

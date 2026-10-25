@@ -3,7 +3,7 @@ Scaffold of `index.md` at the root (Complete level only). It is the catalogue of
 Filling rules:
 - One line per note. Each description says what question the note answers, written as `answers "..."`, in 20 words or fewer, drawn from the note's real content and never invented. Example: `- [[Context/offers-and-prices]]: answers "what do you charge, what is included, on what conditions?"`
 - List the notes of `Context/`, `Projects/` (the README of each project), `Journal/`, `Decisions/`, `Resources/` (including the files in `Resources/sources/`).
-- Do not list the `CLAUDE.md` files, `AGENTS.md`, `brief.md`, `graph.html` or the index itself.
+- Do not list the `CLAUDE.md` files, `AGENTS.md`, `brief.md`, `graph.html`, `board.html`, the files in `Tasks/` (the board is their catalogue) or the index itself.
 - No prices or other figures in the descriptions: they go stale and can contradict the notes.
 - A file that is not Markdown keeps its extension in the link (`[[Resources/sources/price-list.pdf]]`).
 - An empty folder has no section.

@@ -4,7 +4,7 @@ Plugins from **AMM (AI Magic Makers)** for entrepreneurs and small businesses.
 
 | Plugin | What it does |
 |---|---|
-| [`amm-os-starter`](plugins/amm-os-starter) | Builds your **Second Brain**: an interview in three short rounds, then a plain folder of Markdown files that Claude, ChatGPT or Gemini can read. Also checks, extends, maps and upgrades that folder. |
+| [`amm-os-starter`](plugins/amm-os-starter) | Builds your **Second Brain**: an interview in three short rounds, then a plain folder of Markdown files that Claude, ChatGPT or Gemini can read. Also checks, extends, maps and upgrades that folder, and at the Complete level runs a task board with a small AI crew (Writer, Researcher, Checker) that prepares drafts for you to approve. |
 
 ## Install in Claude
 
@@ -53,6 +53,7 @@ amm-marketplace/
     amm-os-starter/                  one folder per plugin
       .claude-plugin/plugin.json     the plugin manifest and its version
       skills/amm-os-starter/         the skill, its references and script
+      agents/                        the crew: writer, researcher, checker
       README.md                      participant guide
       CHANGELOG.md
   .github/workflows/

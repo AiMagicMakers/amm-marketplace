@@ -117,6 +117,25 @@ When a note summarises a document in `sources/`, it cites it in its `sources` fi
 - No name of a private client or personal data in the examples. Anonymise.
 - Put nothing in `sources/` that contains a national ID, bank details, a password or contact details of private clients.
 
+## Section: Tasks
+
+# Tasks
+
+The work that serves {{Name}}'s goals. One file per task, named `T-0001-short-title.md`. The AI crew (Writer, Researcher, Checker) prepares drafts; {{Name}} decides. The board, `board.html` at the root, shows every task by status and what the crew logged.
+
+## Statuses
+
+backlog, ready, in-progress, review, done, blocked. A task is `ready` only when its "Done when" section lists at least one condition. Only {{Name}} moves a task from `review` to `done`.
+
+## Rules
+
+- Draft only: never send, publish or schedule anything, and never change a file outside `Tasks/` (the board is an exception, and so is saving an approved text in `Resources/templates/`, which needs {{Name}}'s yes).
+- Work one task at a time, and log every step in the task's Log.
+- Log line format, one per event, append only: `- YYYY-MM-DD HH:MM | Agent | mode | event | note`. Agent is You, Claude, Writer, Researcher or Checker. Mode is you, main, sub-agent or inline. Event is created, ready, started, finished, review, approved, changes, blocked, unblocked or note. Write `sub-agent` only when a sub-agent really ran.
+- No national ID, bank details, passwords or personal data about clients in tasks, logs or drafts.
+- Link each task to a goal in [[Context/goals]].
+- Say "show the board" to rebuild `board.html`. Never read that file: it is generated.
+
 ## Section: Skills
 
 # Skills

@@ -1,6 +1,6 @@
 ---
 name: amm-os-starter
-description: This skill should be used when the user asks to "build my second brain", "set up my second brain", "set up AMM OS", or "create my AI memory folder", or wants to turn what they know about their business into Markdown files any AI can read. It interviews the user in three short rounds and writes a folder of notes. It also manages an existing Second Brain folder: "check my second brain", "add this document to my second brain", "show my second brain map", "update my second brain", "upgrade my second brain".
+description: This skill should be used when the user asks to "build my second brain", "set up my second brain", "set up AMM OS", or "create my AI memory folder", or wants to turn what they know about their business into Markdown files any AI can read. It interviews the user in three short rounds and writes a folder of notes. It also manages an existing Second Brain folder: "check my second brain", "add this document to my second brain", "show my second brain map", "update my second brain", "upgrade my second brain", and, with the task board, "add a task", "show the board", "work the next task".
 ---
 
 # AMM OS Starter
@@ -35,14 +35,14 @@ The users are entrepreneurs, freelancers and SMB owners, mostly in Morocco, ofte
 
 ## Version
 
-Current skill version: **2.1.0**. Write `skill_version: 2.1.0` in the frontmatter of the generated root `CLAUDE.md`. When a release changes what the skill generates, bump the number in all of these places: this section, `references/upgrade.md`, `references/root-claude-md.md`, `.claude-plugin/plugin.json` and `CHANGELOG.md`; then add an upgrade section to `references/upgrade.md`. If a folder's version is newer than the skill's, tell the user to update the skill and change nothing.
+Current skill version: **2.2.0**. Write `skill_version: 2.2.0` in the frontmatter of the generated root `CLAUDE.md`. When a release changes what the skill generates, bump the number in all of these places: this section, `references/upgrade.md`, `references/root-claude-md.md`, `.claude-plugin/plugin.json` and `CHANGELOG.md`; then add an upgrade section to `references/upgrade.md`. If a folder's version is newer than the skill's, tell the user to update the skill and change nothing.
 
 ## Levels
 
 | Level | What is created |
 |---|---|
 | **Essential** (default) | Root files (`CLAUDE.md`, `AGENTS.md`, `brief.md`, `.claudeignore`) + `Context/` (its `CLAUDE.md` + 8 context files) |
-| **Complete** | Everything in Essential + `index.md` (catalogue of all notes) + `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with `sources/`), `Skills/`, `Archive/` |
+| **Complete** | Everything in Essential + `index.md` (catalogue of all notes) + `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with `sources/`), `Tasks/` (task board and AI crew), `Skills/`, `Archive/` |
 
 In Essential, current projects go into a section of `Context/goals.md` and drains go into `Context/processes.md`. In Complete, each project also gets its own folder with a `README.md`.
 
@@ -52,8 +52,8 @@ In Essential, current projects go into a section of `Context/goals.md` and drain
 
 1. Work out the destination: the folder selected in Cowork, or the current directory in Claude Code. Look there (and in the current directory itself) for folders named `Second Brain - *`. If unclear, ask where to create it (one question).
 2. The top folder is named `Second Brain - {Name}`.
-3. If the user asked for Check, Add a document, Show the map, Update, Move to Complete or Upgrade and no `Second Brain - *` folder is found, say so and offer to build one. If several are found, ask which.
-4. If that folder already exists, do not start over. Read its root `CLAUDE.md` (level and `skill_version`), then offer: **Update** and **Move to Complete** (see `references/update-and-complete.md`), **Check** (health report, see "Check mode"), **Add a document** (see "Add mode"), **Show the map** (see `references/map-mode.md`), **Upgrade** (only if its `skill_version` is older than the current one, see "Upgrade mode"), or **Cancel**. If the user's first message already names one of these, go straight to it.
+3. If the user asked for Check, Add a document, Show the map, a task action, Update, Move to Complete or Upgrade and no `Second Brain - *` folder is found, say so and offer to build one. If several are found, ask which.
+4. If that folder already exists, do not start over. Read its root `CLAUDE.md` (level and `skill_version`), then offer: **Update** and **Move to Complete** (see `references/update-and-complete.md`), **Check** (health report, see "Check mode"), **Add a document** (see "Add mode"), **Show the map** (see `references/map-mode.md`), **Tasks** (add a task, show the board, work the next task: see `references/tasks-mode.md`), **Upgrade** (only if its `skill_version` is older than the current one, see "Upgrade mode"), or **Cancel**. If the user's first message already names one of these, go straight to it.
 
 ### Step 1. Quick intake (one short exchange)
 
@@ -110,7 +110,8 @@ Work silently, without narrating each file. Create folders first, then files, in
 | 14 | `Journal/CLAUDE.md` and `Journal/{today}.md` | section "Journal" + `journal-note.md` | Complete |
 | 15 | `Decisions/CLAUDE.md` | section "Decisions" + `decision-note.md` | Complete |
 | 16 | `Resources/CLAUDE.md`, plus the folder `Resources/sources/` (filled in Step 3) | section "Resources" | Complete |
-| 17 | `Skills/CLAUDE.md` | section "Skills" | Complete |
+| 17 | `Tasks/CLAUDE.md` (empty folder otherwise: tasks are created on request) | section "Tasks" | Complete |
+| 17b | `Skills/CLAUDE.md` | section "Skills" | Complete |
 | 18 | `Archive/` (empty folder, no file) | none | Complete |
 | 19 | `index.md` (written after all notes exist) | `index-md.md` | Complete |
 | 20 | `brief.md` (written last) | `brief-md.md` | both |
@@ -134,8 +135,8 @@ Run these checks and fix what fails:
 1. Search the new folder for the characters U+2014 and U+2013, excluding `Resources/sources/` (untouched originals) and `graph.html`: zero hits. Use the search tool, or read the files if no shell is available.
 2. Search the same files for `{{` and for leftover `FILE START` or `FILE END` markers: zero hits.
 3. Every `[[wikilink]]` outside inline code points to a file that exists. Example wikilinks inside backticks are fine.
-4. Every `.md` file has frontmatter with `type`, `updated`, `tags`, and every note in `Context/` (not its `CLAUDE.md`) also has `sources`. The root `CLAUDE.md` has `skill_version: 2.1.0`. `.claudeignore` lists `graph.html`.
-5. Complete only: every note appears in `index.md` and every index line points to an existing file.
+4. Every `.md` file has frontmatter with `type`, `updated`, `tags`, and every note in `Context/` (not its `CLAUDE.md`) also has `sources`. The root `CLAUDE.md` has `skill_version: 2.2.0`. `.claudeignore` lists `graph.html`.
+5. Complete only: every note appears in `index.md` and every index line points to an existing file. Files in `Tasks/` are not listed in the index.
 6. No file contains a national ID, bank details, password or private client contact. Include `Resources/sources/` in this scan (a document that fails it must not be copied there), and skip `graph.html`.
 7. Count the `[TO COMPLETE]` per file for the final report. Ignore the files where the marker only appears as a rule description (both `CLAUDE.md` levels, `AGENTS.md`, `Context/rules.md`) and the unfilled-journal mention.
 8. No emoji (same files as check 1).
@@ -150,7 +151,7 @@ Give:
 - One suggested next step, for example completing the most important `[TO COMPLETE]` or testing with a real task ("write me a follow-up message for a quote with no reply").
 - If the level was Essential, one line: they can run the skill again later to move to Complete.
 - One backup line: the folder lives only on their computer, so copy it now and then to a cloud drive or a USB key (a plain copy of the folder is enough).
-- One line of later options: they can say "check my second brain" for a health report, "add this document to my second brain" for a new quote template, price list or brief, and "show my second brain map" for a clickable map of their notes.
+- One line of later options: they can say "check my second brain" for a health report, "add this document to my second brain" for a new quote template, price list or brief, "show my second brain map" for a clickable map of their notes, and "add a task" or "show the board" to put the AI crew to work on their goals.
 
 ## Check mode
 
@@ -159,6 +160,10 @@ Read `references/verify.md` and follow it. It is read-only until the user approv
 ## Add mode
 
 Read `references/add-document.md` and follow it. It brings a new document into an existing folder: keep the original in `Resources/sources/` (Complete), propose the changes note by note, show both values when the document contradicts something already written, apply only what the user approves, then update `sources`, `index.md`, the journal and `brief.md`. Never guess a missing fact.
+
+## Tasks mode
+
+Read `references/tasks-mode.md` and follow it. It covers adding a task, building the board (`board.html`), and working the next task with the Writer, Researcher and Checker agents. Draft only: nothing is ever sent or published, and only the owner closes a task. Task files use `references/task-note.md`.
 
 ## Map mode
 

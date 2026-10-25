@@ -59,8 +59,8 @@ def list_notes(root):
                 continue
             path = os.path.join(folder, name)
             rel = os.path.relpath(path, root).replace(os.sep, "/")
-            if rel.startswith("Resources/sources/"):
-                continue  # untouched originals are not notes
+            if rel.startswith("Resources/sources/") or rel.startswith("Tasks/"):
+                continue  # untouched originals and tasks (shown on board.html) are not notes on the map
             notes[rel[:-3]] = path
     return notes
 

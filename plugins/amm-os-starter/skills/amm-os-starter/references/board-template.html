@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task board</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a64; --line: #d9d6cc;
+    --warn: #c0392b; --accent: #2f5d8a; --ok: #2e7d4f; --review: #b7791f; --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a; --panel: #1c1f25; --ink: #ecebe6; --muted: #9a9a93; --line: #2c3038;
+      --warn: #ff7b6b; --accent: #7fb0e0; --ok: #6cc28d; --review: #e0b25c; --card: #20242b;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body { background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 16px 20px 8px; }
+  h1 { font-size: 18px; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .chip { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-size: 12px; background: var(--panel); }
+  .chip.warn { border-color: var(--warn); color: var(--warn); }
+  .chip.review { border-color: var(--review); color: var(--review); }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .bar input[type=search], .bar select { padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit; }
+  .bar label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .crew { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; padding: 0 20px 10px; }
+  .agent { border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 8px 10px; }
+  .agent b { display: inline-block; margin-right: 6px; }
+  .agent .st { font-size: 11px; border-radius: 999px; padding: 1px 8px; border: 1px solid var(--line); color: var(--muted); }
+  .agent .st.on { border-color: var(--ok); color: var(--ok); }
+  .agent p { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+  .main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; padding: 0 20px 20px; align-items: start; }
+  .board { display: grid; grid-template-columns: repeat(6, minmax(135px, 1fr)); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+  .col { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-height: 120px; min-width: 0; }
+  .col h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 2px 4px 8px; display: flex; justify-content: space-between; }
+  .col.review { border-color: var(--review); }
+  .card { display: block; width: 100%; text-align: left; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin-bottom: 8px; font: inherit; cursor: pointer; }
+  .card:hover, .card:focus, .card.sel { border-color: var(--accent); outline: none; }
+  .card .id { color: var(--muted); font-size: 11px; }
+  .card .t { font-weight: 600; margin: 2px 0 4px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 4px; font-size: 11px; color: var(--muted); }
+  .tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; }
+  .tag.high { border-color: var(--warn); color: var(--warn); }
+  .tag.over { border-color: var(--warn); color: var(--warn); }
+  .tag.you { border-color: var(--review); color: var(--review); }
+  .tag.w { border-color: var(--warn); color: var(--warn); }
+  aside { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; position: sticky; top: 10px; max-height: calc(100vh - 20px); overflow-y: auto; }
+  aside h3 { margin: 0 0 4px; font-size: 16px; }
+  aside h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 14px 0 6px; }
+  aside p { margin: 4px 0; }
+  .muted { color: var(--muted); }
+  table.log { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.log td { border-top: 1px solid var(--line); padding: 4px 4px; vertical-align: top; }
+  table.log td:first-child { white-space: nowrap; color: var(--muted); }
+  pre.res { white-space: pre-wrap; word-wrap: break-word; font: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin: 0; }
+  button.link { background: none; border: 0; color: var(--accent); font: inherit; cursor: pointer; padding: 0; }
+  @media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .board { grid-template-columns: repeat(6, 200px); }
+    aside { position: static; max-height: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+  <div class="chips" id="chips"></div>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Search tasks">
+    <select id="goal"><option value="">All goals</option></select>
+    <select id="prio"><option value="">All priorities</option><option>high</option><option>normal</option><option>low</option></select>
+    <label><input type="checkbox" id="auto"> Auto-refresh (10 s)</label>
+  </div>
+</header>
+<div class="crew" id="crew" aria-label="Crew"></div>
+<div class="main">
+  <div class="board" id="board"></div>
+  <aside id="detail"><p class="muted">Click a task to see what is wanted, what done looks like, the log and the draft.</p></aside>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var now = new Date(); var today = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+  var sel = null, showAllDone = false;
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; }
+  function daysBetween(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000); }
+  function overdue(t) { return t.due && t.status !== 'done' && /^\d{4}-\d\d-\d\d$/.test(t.due) && t.due < today; }
+  function norm(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
+  document.title = D.title + ' tasks';
+  document.getElementById('title').textContent = D.title + ': task board';
+  document.getElementById('sub').textContent = 'Generated on ' + D.date + '. This page is a snapshot: it is rebuilt after every task change.';
+
+  var byStatus = {}; D.statuses.forEach(function (s) { byStatus[s[0]] = 0; });
+  D.tasks.forEach(function (t) { byStatus[t.status]++; });
+  var chips = document.getElementById('chips');
+  function chip(txt, cls) { chips.appendChild(el('span', 'chip' + (cls ? ' ' + cls : ''), txt)); }
+  var open = D.tasks.filter(function (t) { return t.status !== 'done'; }).length;
+  chip(D.tasks.length + ' tasks');
+  chip(open + ' open');
+  if (byStatus.review) chip(byStatus.review + ' waiting for you', 'review');
+  var od = D.tasks.filter(overdue).length; if (od) chip(od + ' overdue', 'warn');
+  if (byStatus.blocked) chip(byStatus.blocked + ' blocked', 'warn');
+
+  var goals = []; D.tasks.forEach(function (t) { if (t.goal && goals.indexOf(t.goal) < 0) goals.push(t.goal); });
+  var gs = document.getElementById('goal');
+  goals.forEach(function (g) { var o = el('option', '', g); o.value = g; gs.appendChild(o); });
+
+  // Crew panel, built only from what the log says
+  var crewBox = document.getElementById('crew');
+  D.crew.forEach(function (name) {
+    var events = [];
+    D.tasks.forEach(function (t) { t.log.forEach(function (e) { if (e.agent === name) events.push({ e: e, t: t }); }); });
+    events.sort(function (a, b) { return a.e.when < b.e.when ? -1 : 1; });
+    var last = events[events.length - 1];
+    var card = el('div', 'agent');
+    var head = el('div');
+    head.appendChild(el('b', '', name));
+    var working = last && last.e.event === 'started';
+    head.appendChild(el('span', 'st' + (working ? ' on' : ''), working ? 'working' : (last ? 'idle' : 'no activity yet')));
+    card.appendChild(head);
+    if (last) {
+      card.appendChild(el('p', '', (working ? 'On ' : 'Last: ') + last.t.id + ' ' + last.t.title));
+      card.appendChild(el('p', '', last.e.event + (last.e.note ? ': ' + last.e.note : '') + ' (' + last.e.when + ', ' + last.e.mode + ')'));
+    } else {
+      card.appendChild(el('p', '', 'Nothing has been logged for this agent.'));
+    }
+    crewBox.appendChild(card);
+  });
+
+  function visible(t) {
+    var q = norm(document.getElementById('q').value.trim());
+    var g = document.getElementById('goal').value, p = document.getElementById('prio').value;
+    if (g && t.goal !== g) return false;
+    if (p && t.priority !== p) return false;
+    if (q && norm(t.id + ' ' + t.title + ' ' + t.wanted).indexOf(q) < 0) return false;
+    return true;
+  }
+  var prioRank = { high: 0, normal: 1, low: 2 };
+  function order(a, b) {
+    if (prioRank[a.priority] !== prioRank[b.priority]) return prioRank[a.priority] - prioRank[b.priority];
+    var da = a.due || '9999', db = b.due || '9999';
+    if (da !== db) return da < db ? -1 : 1;
+    return a.id < b.id ? -1 : 1;
+  }
+
+  function renderBoard() {
+    var board = document.getElementById('board'); board.innerHTML = '';
+    D.statuses.forEach(function (s) {
+      var tasks = D.tasks.filter(function (t) { return t.status === s[0] && visible(t); }).sort(order);
+      var col = el('div', 'col' + (s[0] === 'review' ? ' review' : ''));
+      var h = el('h2'); h.appendChild(el('span', '', s[1])); h.appendChild(el('span', '', String(tasks.length))); col.appendChild(h);
+      var list = tasks;
+      if (s[0] === 'done' && !showAllDone && tasks.length > 8) list = tasks.slice(-8);
+      list.forEach(function (t) {
+        var b = el('button', 'card' + (sel === t ? ' sel' : '')); b.type = 'button';
+        b.appendChild(el('div', 'id', t.id));
+        b.appendChild(el('div', 't', t.title));
+        var meta = el('div', 'meta');
+        if (t.priority === 'high') meta.appendChild(el('span', 'tag high', 'high'));
+        if (t.due) meta.appendChild(el('span', 'tag' + (overdue(t) ? ' over' : ''), (overdue(t) ? 'overdue ' : 'due ') + t.due));
+        if (t.status === 'review') meta.appendChild(el('span', 'tag you', 'waiting for you'));
+        if (t.warnings.length) meta.appendChild(el('span', 'tag w', 'check this task'));
+        b.appendChild(meta);
+        if (t.goal) b.appendChild(el('div', 'meta', t.goal));
+        b.addEventListener('click', function () { sel = t; renderBoard(); renderDetail(); });
+        col.appendChild(b);
+      });
+      if (s[0] === 'done' && tasks.length > 8) {
+        var btn = el('button', 'link', showAllDone ? 'Show fewer' : 'Show all ' + tasks.length);
+        btn.type = 'button'; btn.addEventListener('click', function () { showAllDone = !showAllDone; renderBoard(); });
+        col.appendChild(btn);
+      }
+      board.appendChild(col);
+    });
+  }
+
+  function renderDetail() {
+    var box = document.getElementById('detail'); box.innerHTML = '';
+    if (!sel) { box.appendChild(el('p', 'muted', 'Click a task to see what is wanted, what done looks like, the log and the draft.')); return; }
+    var t = sel;
+    box.appendChild(el('h3', '', t.id + ' ' + t.title));
+    box.appendChild(el('p', 'muted', t.path));
+    var statusName = (D.statuses.filter(function (s) { return s[0] === t.status; })[0] || [t.status, t.status])[1];
+    box.appendChild(el('p', '', 'Status: ' + statusName + '. Priority: ' + t.priority + (t.due ? '. Due: ' + t.due : '') + (t.owner ? '. Owner: ' + t.owner : '') + '.'));
+    if (t.goal) box.appendChild(el('p', '', 'Goal: ' + t.goal));
+    t.warnings.forEach(function (w) { box.appendChild(el('p', 'tag w', w)); });
+    box.appendChild(el('h4', '', 'What is wanted'));
+    box.appendChild(el('p', '', t.wanted || 'Nothing written.'));
+    box.appendChild(el('h4', '', 'Done when'));
+    if (t.done_when.length) { var ul = el('ul'); t.done_when.forEach(function (d) { ul.appendChild(el('li', '', d)); }); box.appendChild(ul); }
+    else box.appendChild(el('p', 'muted', 'No condition written yet.'));
+    box.appendChild(el('h4', '', 'Log'));
+    if (t.log.length) {
+      var tb = el('table', 'log');
+      t.log.forEach(function (e) {
+        var tr = el('tr');
+        tr.appendChild(el('td', '', e.when));
+        tr.appendChild(el('td', '', e.agent + ' (' + e.mode + '): ' + e.event + (e.note ? ', ' + e.note : '')));
+        tb.appendChild(tr);
+      });
+      box.appendChild(tb);
+    } else box.appendChild(el('p', 'muted', 'No log lines yet.'));
+    box.appendChild(el('h4', '', 'Result (draft)'));
+    if (t.result) box.appendChild(el('pre', 'res', t.result)); else box.appendChild(el('p', 'muted', 'Nothing yet.'));
+  }
+
+  ['q', 'goal', 'prio'].forEach(function (id) { document.getElementById(id).addEventListener('input', renderBoard); });
+  var auto = document.getElementById('auto'), timer = null;
+  try { auto.checked = localStorage.getItem('amm-board-auto') === '1'; } catch (e) {}
+  function setAuto() {
+    try { localStorage.setItem('amm-board-auto', auto.checked ? '1' : '0'); } catch (e) {}
+    if (timer) { clearInterval(timer); timer = null; }
+    if (auto.checked) timer = setInterval(function () { location.reload(); }, 10000);
+  }
+  auto.addEventListener('change', setAuto); setAuto();
+  renderBoard(); renderDetail();
+})();
+</script>
+</body>
+</html>

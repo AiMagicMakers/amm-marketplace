@@ -7,7 +7,7 @@ FILE START
 type: guide
 updated: {{date}}
 tags: [second-brain, routing, rules]
-skill_version: 2.1.0
+skill_version: 2.2.0
 ---
 
 # {{Name}}'s Second Brain
@@ -48,6 +48,7 @@ Do not say "I loaded the context". Read, remember, answer.
 | Original document provided by {{Name}} (Complete) | `Resources/sources/`, never modified |
 | Checking the quality of the folder | Say "check my second brain": the amm-os-starter skill produces a report |
 | A new document to bring in (quote template, price list, brief) | Say "add this document to my second brain": the amm-os-starter skill proposes the changes before making them |
+| Tasks, drafts waiting for review, what the crew did (Complete) | `Tasks/`, see `Tasks/CLAUDE.md`. Say "add a task", "show the board" or "work the next task" |
 | Seeing the map of the notes | Say "show my second brain map": the skill creates `graph.html`. Never read that file, it is generated |
 
 For the details of a folder, read its `CLAUDE.md`.
@@ -72,6 +73,7 @@ For the details of a folder, read its `CLAUDE.md`.
 14. (Complete) The files in `Resources/sources/` are {{Name}}'s originals. Never modify them: summarise them in a note and cite them in that note's `sources` field.
 15. (Complete) When a text you just wrote could be reused (a template message, an answer to an objection, a quote template), offer in one sentence to save it in `Resources/templates/` or `Resources/examples/`. Save it only after {{Name}} says yes, and add its line to `index.md`.
 16. (Complete) After meaningful work (not a quick question), offer in one sentence to add a short entry to today's journal: what was decided and why, what worked or failed (an exact fix, a message that got a reply, a mistake to avoid), and what comes next. Save it only after {{Name}} says yes.
+17. (Complete) Tasks: work only on tasks whose status is `ready`, one task per run. Produce drafts only: never send, publish or schedule anything, and never change a file outside `Tasks/` (except `board.html`, and `Resources/templates/` after {{Name}} says yes). Only {{Name}} moves a task to `done`. Log every step in the task's Log, using the line format in `Tasks/CLAUDE.md`.
 
 ## User corrections (permanent rules)
 

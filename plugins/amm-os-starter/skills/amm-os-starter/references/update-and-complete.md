@@ -15,10 +15,10 @@ Use when the person wants to refresh their information ("update my second brain"
 
 Use when an Essential folder should become Complete ("move to Complete", "add projects and a journal").
 
-1. Announce in one short message what will be added: `index.md`, `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with `sources/`), `Skills/`, `Archive/`. Ask for a yes.
+1. Announce in one short message what will be added: `index.md`, `Projects/`, `Journal/`, `Decisions/`, `Resources/` (with `sources/`), `Tasks/` (empty), `Skills/`, `Archive/`. Ask for a yes.
 2. Create the missing folders, each with its `CLAUDE.md` from `folder-claude-md.md`. `Archive/` is created empty.
 3. Projects: if `Context/goals.md` has a "Current projects" table, create `Projects/{slug}/README.md` for each row from `project-readme.md`, using only what the table says. Then replace the table in `goals.md` with a list of `[[Projects/{slug}/README]]` links with one sentence each (as the Complete section of `context-goals.md` shows).
-4. Root `CLAUDE.md`: restore the Complete-only lines that Essential removed (startup steps for `index.md` and the journal, the table rows, rules 13 to 15), remove the sentence saying the Complete level adds folders, and set `skill_version` to the current version.
+4. Root `CLAUDE.md`: restore the Complete-only lines that Essential removed (startup steps for `index.md` and the journal, the table rows, rules 13 to 17), remove the sentence saying the Complete level adds folders, and set `skill_version` to the current version.
 5. `index.md`: write it from the notes that now exist (see `index-md.md`). `.claudeignore` and `AGENTS.md` already fit both levels; add to `AGENTS.md` the line about `index.md` if it is missing.
 6. Documents the person provided earlier were only cited, not copied. If they are still available, offer to copy them into `Resources/sources/`. Do not copy any that hold sensitive data.
 7. Journal: write today's note from `journal-note.md`, recording the move.
