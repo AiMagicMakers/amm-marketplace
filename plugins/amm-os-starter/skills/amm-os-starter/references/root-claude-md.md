@@ -7,7 +7,7 @@ FILE START
 type: guide
 updated: {{date}}
 tags: [second-brain, routing, rules]
-skill_version: 2.0.0
+skill_version: 2.1.0
 ---
 
 # {{Name}}'s Second Brain
@@ -58,7 +58,7 @@ For the details of a folder, read its `CLAUDE.md`.
 
 1. Write the notes in English. When drafting a text for {{Name}}'s clients, use the language and tone described in [[Context/style]]. Respect the forbidden words.
 2. Never invent a price, figure, result or client reference. If the information is missing, write `[TO COMPLETE]` and say so.
-3. Prices are in DH excl. VAT. 20% VAT is added on top. Do not change a price unless {{Name}} asks.
+3. Prices are in DH excl. VAT. 20% VAT is added on top. Do not change a price unless {{Name}} asks. If the line "Prices valid as of" in [[Context/offers-and-prices]] is older than 90 days, say so before quoting a price.
 4. Never record a national ID (CIN), bank details (RIB), a password or personal data about clients. See [[Context/rules]].
 5. Respect `.claudeignore`: do not read the files and folders listed in it.
 6. When important information appears in the conversation, update the right file without asking permission, then say what you changed in one sentence.
@@ -68,9 +68,10 @@ For the details of a folder, read its `CLAUDE.md`.
 10. After a change in `Context/`, also update `brief.md` so the two stay in agreement.
 11. Before sending or publishing anything, {{Name}} reads and approves. You prepare, {{Name}} decides.
 12. When you answer from the Second Brain, say in one line which file you used. Also flag what is missing (`[TO COMPLETE]`) or looks outdated, instead of guessing it.
-13. (Complete) Every note created, renamed or deleted updates `index.md` in the same operation, with a line of 20 words or fewer.
+13. (Complete) Every note created, renamed or deleted updates `index.md` in the same operation, with a line of 20 words or fewer that says what question the note answers.
 14. (Complete) The files in `Resources/sources/` are {{Name}}'s originals. Never modify them: summarise them in a note and cite them in that note's `sources` field.
 15. (Complete) When a text you just wrote could be reused (a template message, an answer to an objection, a quote template), offer in one sentence to save it in `Resources/templates/` or `Resources/examples/`. Save it only after {{Name}} says yes, and add its line to `index.md`.
+16. (Complete) After meaningful work (not a quick question), offer in one sentence to add a short entry to today's journal: what was decided and why, what worked or failed (an exact fix, a message that got a reply, a mistake to avoid), and what comes next. Save it only after {{Name}} says yes.
 
 ## User corrections (permanent rules)
 

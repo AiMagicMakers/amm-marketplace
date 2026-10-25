@@ -14,7 +14,7 @@ Bring new information into the Second Brain without damaging it. Triggers: "add 
 5. **Apply only what is approved.**
    - Modify the notes as little as possible, using the document's words when they are good.
    - Add the document to the `sources` field of each note touched.
-   - Update `updated` only in notes whose content changed.
+   - Update `updated` only in notes whose content changed. If a price changed, also set the "Prices valid as of" line in `offers-and-prices.md` to the document's date (or today's date if the document has none).
    - Complete level: add the document's line to `index.md` (and the line of any new note), and a line to today's journal.
    - If a conflict stays unresolved, write one line `Open question: ...` next to the value in the note, naming both values and the source file, and record it in today's journal (Complete). Remove the line once the person decides.
    - If `Context/` changed, redo `brief.md`.

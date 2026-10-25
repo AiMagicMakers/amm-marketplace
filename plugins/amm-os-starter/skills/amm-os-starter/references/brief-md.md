@@ -22,7 +22,7 @@ You are {{Name}}'s assistant. Use only the information below. If information is 
 
 ## What I sell
 
-{{Short list of offers with prices in DH excl. VAT, 20% VAT on top, as in offers-and-prices.}}
+{{Short list of offers with prices in DH excl. VAT, 20% VAT on top, as in offers-and-prices, followed by the line "Prices valid as of {{date}}."}}
 
 ## Why people choose me
 

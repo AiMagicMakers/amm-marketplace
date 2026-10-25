@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.0
+
+Three small changes, prompted by a review of retrieval and memory practices:
+
+- **Index lines say what question each note answers** (`answers "..."`), so the right note is easier to find as the Second Brain grows.
+- **Dated prices.** `offers-and-prices.md` has a "Prices valid as of" line. Check mode asks you to confirm prices older than 90 days, and the assistant says so before quoting an old price.
+- **End-of-session capture** (Complete level). After meaningful work, the assistant offers a short journal entry: what was decided and why, what worked or failed, and what comes next. The Journal gains a "What worked or failed" section.
+
+Upgrade from 2.0.0: say "upgrade my second brain". Your own notes are not rewritten. You will be asked to confirm that your prices are still current.
+
 ## 2.0.0
 
 The whole skill is now in English: instructions, interview, generated files, folder and file names, README.

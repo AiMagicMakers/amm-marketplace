@@ -30,4 +30,4 @@ Items marked `[TO COMPLETE]` to finish first:
 
 FILE END
 
-Shape of an ordinary note: same four sections (add a section when something needs recording, for example "Document added"), title `# YYYY-MM-DD`, tags `[journal, {{topic}}]`, and `project: name` in the frontmatter if the work concerns a specific project.
+Shape of an ordinary note: same sections, plus "What worked or failed" when there is a lesson (an exact fix, a message that got a reply, a mistake to avoid), and any other section when something needs recording, for example "Document added", title `# YYYY-MM-DD`, tags `[journal, {{topic}}]`, and `project: name` in the frontmatter if the work concerns a specific project.

@@ -13,6 +13,8 @@ sources: [{{sources: initial-interview and the names of the documents used}}]
 
 All prices are in DH excl. VAT. 20% VAT is added on top.
 
+Prices valid as of: {{date the prices were given: the interview date, or the date of the document they come from; otherwise [TO COMPLETE]}}
+
 ## Offers table
 
 | Offer | For whom | What is included | Duration or format | Price (DH excl. VAT) |

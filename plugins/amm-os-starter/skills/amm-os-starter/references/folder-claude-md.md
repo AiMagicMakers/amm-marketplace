@@ -69,11 +69,11 @@ One note per meaningful working day, named `YYYY-MM-DD.md`. It records what was 
 
 ## Shape of a note
 
-Sections: What was done, Decisions made, What is left to do, Ideas to keep.
+Sections: What was done, Decisions made, What is left to do, Ideas to keep, and What worked or failed when there is a lesson (an exact fix, a message that got a reply, a mistake to avoid).
 
 ## Rules
 
-- Write in the journal when real work took place, not for a quick question.
+- Write in the journal when real work took place, not for a quick question. After meaningful work, offer a short entry and save it only after {{Name}} says yes.
 - If an important decision is made, also copy it to `Decisions/` and put a `[[link]]` in the journal.
 - Stay concrete: project names, what was delivered, what blocks.
 - At the start of a session, read the latest note.

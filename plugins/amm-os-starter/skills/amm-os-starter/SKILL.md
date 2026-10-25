@@ -35,7 +35,7 @@ The users are entrepreneurs, freelancers and SMB owners, mostly in Morocco, ofte
 
 ## Version
 
-Current skill version: **2.0.0**. Write `skill_version: 2.0.0` in the frontmatter of the generated root `CLAUDE.md`. When a release changes what the skill generates, bump the number in all of these places: this section, `references/upgrade.md`, `references/root-claude-md.md`, `.claude-plugin/plugin.json` and `CHANGELOG.md`; then add an upgrade section to `references/upgrade.md`. If a folder's version is newer than the skill's, tell the user to update the skill and change nothing.
+Current skill version: **2.1.0**. Write `skill_version: 2.1.0` in the frontmatter of the generated root `CLAUDE.md`. When a release changes what the skill generates, bump the number in all of these places: this section, `references/upgrade.md`, `references/root-claude-md.md`, `.claude-plugin/plugin.json` and `CHANGELOG.md`; then add an upgrade section to `references/upgrade.md`. If a folder's version is newer than the skill's, tell the user to update the skill and change nothing.
 
 ## Levels
 
@@ -122,7 +122,7 @@ Per-file notes:
 - **Journal**: today's note records that the Second Brain was created, which files exist, and the list of `[TO COMPLETE]` to finish. Other days are created later by the assistant.
 - **Drains** (Round 3): write each as the five-part template described in `context-processes.md`: When X happens, I do Y, it takes Z, the result is W, I want V. A missing part is `[TO COMPLETE]`. Do not propose automations the user did not ask for, but you may add one line "Idea" under a drain if it is obvious and clearly marked as a suggestion.
 - **`brief.md`**: condense the filled Context files into one page of about 350 to 450 words, no wikilinks, ready to paste at the start of a ChatGPT or Gemini chat. Take facts only from the files you just wrote.
-- **`index.md`**: one line per note, each description drawn from the note's real content. Do not list `CLAUDE.md` files, `AGENTS.md`, `brief.md`, `graph.html` or the index itself.
+- **`index.md`**: one line per note, each line saying what question the note answers, drawn from the note's real content. Do not list `CLAUDE.md` files, `AGENTS.md`, `brief.md`, `graph.html` or the index itself.
 - **`sources` field**: for each `Context/` file, list `initial-interview` plus only the documents or links that actually fed it. A file built only from the interview gets `[initial-interview]`.
 - **`folder-claude-md.md`** contains one section per folder. Each `## Section: X` becomes that folder's `CLAUDE.md` (without the heading line, with frontmatter added). Update the file table to match the files that actually exist.
 - **Corrections section**: the root `CLAUDE.md` always ends with the "User corrections (permanent rules)" section, empty at first. Keep it, never remove it.
@@ -134,7 +134,7 @@ Run these checks and fix what fails:
 1. Search the new folder for the characters U+2014 and U+2013, excluding `Resources/sources/` (untouched originals) and `graph.html`: zero hits. Use the search tool, or read the files if no shell is available.
 2. Search the same files for `{{` and for leftover `FILE START` or `FILE END` markers: zero hits.
 3. Every `[[wikilink]]` outside inline code points to a file that exists. Example wikilinks inside backticks are fine.
-4. Every `.md` file has frontmatter with `type`, `updated`, `tags`, and every note in `Context/` (not its `CLAUDE.md`) also has `sources`. The root `CLAUDE.md` has `skill_version: 2.0.0`. `.claudeignore` lists `graph.html`.
+4. Every `.md` file has frontmatter with `type`, `updated`, `tags`, and every note in `Context/` (not its `CLAUDE.md`) also has `sources`. The root `CLAUDE.md` has `skill_version: 2.1.0`. `.claudeignore` lists `graph.html`.
 5. Complete only: every note appears in `index.md` and every index line points to an existing file.
 6. No file contains a national ID, bank details, password or private client contact. Include `Resources/sources/` in this scan (a document that fails it must not be copied there), and skip `graph.html`.
 7. Count the `[TO COMPLETE]` per file for the final report. Ignore the files where the marker only appears as a rule description (both `CLAUDE.md` levels, `AGENTS.md`, `Context/rules.md`) and the unfilled-journal mention.

@@ -18,10 +18,10 @@ Health check of an existing Second Brain. Triggers: "check my second brain", "re
 |---|---|---|---|
 | 1 | Broken links | Every `[[link]]` outside code points to an existing file (for a link to a PDF or another file, with its extension, check the file itself) | all |
 | 2 | Orphan notes | A note that neither the index nor any other note links to | Complete |
-| 3 | Index up to date | Every note is in `index.md`, every index line points to an existing file, and no index description contains a price or other figure | Complete |
+| 3 | Index up to date | Every note is in `index.md`, every index line points to an existing file, every line says what question the note answers, and no index description contains a price or other figure | Complete |
 | 4 | Missing information | Number of `[TO COMPLETE]` per file, ranked by importance: offers-and-prices, identity, clients, style first | all |
 | 5 | Contradictions | Prices in DH, offer names and tone (formal or friendly) are identical across `offers-and-prices.md`, `brief.md`, `style.md` and project notes. Also list every `Open question` line still left in a note | all |
-| 6 | Stale notes | `updated` older than 90 days, especially `offers-and-prices.md` and `goals.md` | all |
+| 6 | Stale notes | `updated` older than 90 days, especially `offers-and-prices.md` and `goals.md`; also a "Prices valid as of" date older than 90 days, in which case ask the person to confirm the prices are still current | all |
 | 7 | Brief in sync | The facts in `brief.md` are the same as in `Context/`, and `brief.md` is not older than the most recent `Context/` file | all |
 | 8 | Goals and projects | Every project serves a goal, every goal has at least one project | Complete |
 | 9 | Frontmatter | `type`, `updated`, `tags` everywhere, and `sources` in every note of `Context/` (not its `CLAUDE.md`) | all |
